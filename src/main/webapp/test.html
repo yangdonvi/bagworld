@@ -8,9 +8,9 @@
 <form class="container" enctype="multipart/form-data" method="post" id='formBox' name="form">
     <input type="file" id="chooseImage" name="file">
     <!-- 保存用户自定义的背景图片 -->
-    <img id="cropedBigImg" value='custom' alt="lorem ipsum dolor sit" data-address='' title="自定义背景"/>
+    <img id="cropedBigImg" src="img/test001.jpg"/>
 </form>
-<script type="text/javascript" src="/js/jquery-1.8.3.js"></script>
+<script type="text/javascript" src="js/jquery-1.8.3.js"></script>
 <script type="text/javascript">
     $('#chooseImage').on('change', function () {
         var filePath = $(this).val();         //获取到input的value，里面是文件的路径
