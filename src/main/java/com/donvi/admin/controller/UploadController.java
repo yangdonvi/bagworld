@@ -1,4 +1,4 @@
-package com.donvi.admin;
+package com.donvi.admin.controller;
 
 import com.donvi.utils.ServerResponse;
 import org.slf4j.Logger;
