@@ -5,10 +5,12 @@
     <title>test</title>
 </head>
 <body>
-<form class="container" enctype="multipart/form-data" method="post" id='formBox' name="form">
+<form class="container" action="/upload/image" enctype="multipart/form-data" method="post" id='formBox' name="form">
     <input type="file" id="chooseImage" name="file">
     <!-- 保存用户自定义的背景图片 -->
-    <img id="cropedBigImg" src="img/test001.jpg"/>
+    <img id="cropedBigImg" src="////img/test001.jpg"/>
+    <input type="file" id="testUploadImage" name="testUploadImage">
+    <input type="submit" >
 </form>
 <script type="text/javascript" src="js/jquery-1.8.3.js"></script>
 <script type="text/javascript">
