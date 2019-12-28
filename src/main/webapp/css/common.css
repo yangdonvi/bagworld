@@ -1,9 +1,13 @@
 body {background-color: darkgray}
-.midBody {width: 56%;background-color: white;margin-top: -0.5%;margin-left: 22%;}
+.midBody {width: 70%;background-color: white;margin-top: -0.5%;margin-left: 15%;}
 .midTop {height: 80px;background-color: antiquewhite;}
 .midTitles {height: 50px;background-color: aquamarine;}
 .searchDiv {height: 30px;background-color: darkgoldenrod}
 .webNotice {height: 20px;background-color: coral}
-.goodsClassAndHotSales {height: 600px;background-color: darksalmon}
-.goodsClass {width: 25%;background-color: cornflowerblue}
-.hotSales {width: auto;background-color: darkred}
+.goodsClassAndHotSales {height: 400px;background-color: darksalmon}
+.goodsClass {width: 25%;height: 400px;background-color: cornflowerblue;float:left;}
+.hotSales {width: 75%;height: 400px;background-color: darkred;float:right;}
+.classDiv {height: 300px;background-color: darkgreen;}
+.className {height: 30px; background-color: aliceblue;}
+.classImages {height: 270px; background-color: goldenrod;}
+.buttomDiv {height: 80px; background-color: darkslategrey}
