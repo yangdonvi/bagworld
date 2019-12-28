@@ -1,3 +1,9 @@
 body {background-color: darkgray}
 .midBody {width: 56%;background-color: white;margin-top: -0.5%;margin-left: 22%;}
 .midTop {height: 80px;background-color: antiquewhite;}
+.midTitles {height: 50px;background-color: aquamarine;}
+.searchDiv {height: 30px;background-color: darkgoldenrod}
+.webNotice {height: 20px;background-color: coral}
+.goodsClassAndHotSales {height: 600px;background-color: darksalmon}
+.goodsClass {width: 25%;background-color: cornflowerblue}
+.hotSales {width: auto;background-color: darkred}
