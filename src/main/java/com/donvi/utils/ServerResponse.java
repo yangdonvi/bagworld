@@ -20,6 +20,33 @@ public class ServerResponse<T> implements Serializable {
 
     private WebPage webPage;
 
+    public ServerResponse(String code, String desc, T data) {
+        this.code = code;
+        this.msg = desc;
+        this.data = data;
+    }
+
+    public ServerResponse(String code, String desc) {
+        this.code = code;
+        this.msg = desc;
+    }
+
+    public ServerResponse() {
+
+    }
+
+    public static <T> ServerResponse<T> createByError() {
+        return new ServerResponse<T>(ResponseCode.ERROR.getCode(), ResponseCode.ERROR.getDesc());
+    }
+
+    public static <T> ServerResponse<T> createBySuccess() {
+        return new ServerResponse<T>(ResponseCode.SUCCESS.getCode(), ResponseCode.SUCCESS.getDesc());
+    }
+
+    public static <T> ServerResponse<T> createBySuccess(T data) {
+        return new ServerResponse<T>(ResponseCode.SUCCESS.getCode(), ResponseCode.SUCCESS.getDesc(), data);
+    }
+
     public void setCode(String code) {
         this.code = code;
     }

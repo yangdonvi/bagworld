@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>admin</title>
+    <link type="text/css" rel="stylesheet" href="css/common.css">
+</head>
+<body>
+<div class="midBody">
+    <!--头部log-->
+    <div class="midTop">
+
+    </div>
+    <div class="adminMainDiv">
+        <div class="adminMenuDiv">
+            <ul id="adminMenu" style="margin: 0px; padding: 0px;">
+                <li class="adminMenuContent"><a href=""><span style="font-size: 20px">商品管理</span></a></li>
+                <li class="adminMenuContent"><a href=""><span style="font-size: 20px">图片管理</span></a></li>
+            </ul>
+        </div>
+        <div class="adminOperateDiv">
+            <div style="height: 25px;background-color: #AAC7E9;">
+                <label style="margin-left: 3%;font-size: 20px">新增商品:</label>
+            </div>
+            <div style="height: 20%; margin-left: 3%; margin-top: 3%;">
+                <span class="insertLine">一级类别：</span>
+                <select class="insertLine" id="firstParentCode" name="firstParentCode" style="width: 15%">
+                    <option value="101">一级类别1</option>
+                    <option value="102">一级类别2</option>
+                    <option value="103">一级类别3</option>
+                    <option value="104">一级类别4</option>
+                    <option value="105">一级类别5</option>
+                </select>
+                <span class="insertLine" style="margin-left: 4%;">二级类别：</span>
+                <select class="insertLine" id="secondParentCode" name="secondParentCode" style="width: 15%">
+                    <option value="0">无</option>
+                    <option value="201">二级类别1</option>
+                    <option value="202">二级类别2</option>
+                    <option value="203">二级类别3</option>
+                    <option value="204">二级类别4</option>
+                    <option value="205">二级类别5</option>
+                </select>
+                <span class="insertLine" style="margin-left: 4%;">三级类别：</span>
+                <select class="insertLine" id="brandCode" name="brandCode" id="brandCode" style="width: 15%">
+                    <option value="301">品牌1</option>
+                    <option value="302">品牌2</option>
+                    <option value="303">品牌3</option>
+                    <option value="304">品牌4</option>
+                    <option value="305">品牌5</option>
+                </select>
+                <br>
+                <br>
+                <span class="insertLine">商品编号：</span>
+                <input class="insertLine" id="detailCode" readonly="readonly" value="" style="width: 15%; background-color: lightgray">
+                <span class="insertLine" style="margin-left: 4%;">中文名称：</span>
+                <input class="insertLine" id="detailNameCn" style="width: 15%">
+                <span class="insertLine" style="margin-left: 4%;">英文名称：</span>
+                <input class="insertLine" id="detailNameEng" style="width: 15%">
+                <input class="insertLine" id="submitInsert" type="button" style="margin-left: 4%" value="提交">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="js/jquery-1.8.3.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#firstParentCode").change(function () {
+            getMaxDetailCode();
+        });
+        $("#secondParentCode").change(function () {
+            getMaxDetailCode();
+        });
+        $("#brandCode").change(function () {
+            getMaxDetailCode();
+        });
+        $("#submitInsert").click(function () {
+            alert(11);
+        })
+    })
+    
+    function getMaxDetailCode() {
+        var firstParentCode = $("#firstParentCode").val();
+        var secondParentCode = $("#secondParentCode").val();
+        var brandCode = $("#brandCode").val();
+        var json = {
+            "firstParentCode" : firstParentCode,
+            "secondParentCode" : secondParentCode,
+            "brandCode" : brandCode
+        }
+        $.ajax({
+            url: "/goodsOperate/getMaxDetailCode", //请求地址
+            contentType: "application/json",
+            data: JSON.stringify(json),
+            type: "post", //请求类型
+            dataType: "json", //返回类型
+            async: false, //是否异步，默认为true
+            success: function (response) {
+                alert(response);
+                if (response.code == 200) {
+                    if (null != response.data && '' != response.data){
+                        $("#detailCode").val(response.data + 1);
+                    }else {
+                        $("#detailCode").val(firstParentCode.concat(secondParentCode).concat(brandCode).concat('001'));
+                    }
+                }else {
+                    alert("服务器异常");
+                }
+            }
+        })
+    }
+
+</script>
+</body>
+</html>

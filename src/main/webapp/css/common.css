@@ -11,3 +11,11 @@ body {background-color: darkgray}
 .className {height: 30px; background-color: aliceblue;}
 .classImages {height: 270px; background-color: goldenrod;}
 .buttomDiv {height: 80px; background-color: darkslategrey}
+.adminMainDiv {height: 800px; background-color: darksalmon}
+.adminMenuDiv {width: 20%;height: 800px;background-color: lightgray;float:left;}
+.adminOperateDiv {width: 80%;height: 800px;background-color: white;float:right;}
+.adminMenuContent {border-right:1px solid #AAC7E9; background:#E8F5FE;cursor:hand;border-top:3px solid #AAC7E9;}
+#adminMenu li {list-style:none; width:auto; margin-top:0;padding:4px 6px;}
+#adminMenu li a {text-decoration:none; color:#666;}
+#adminMenu li a:hover {color:#333;}
+.insertLine {font-size: 20px;}
