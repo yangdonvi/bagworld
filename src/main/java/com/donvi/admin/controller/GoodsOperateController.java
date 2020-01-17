@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -27,7 +28,7 @@ public class GoodsOperateController {
     private GoodsOperateService operateService;
 
     @PostMapping("/addGoodsDetail")
-    public ServerResponse addGoodsDetail(GoodsDetail goodsDetail){
+    public ServerResponse addGoodsDetail(@RequestBody GoodsDetail goodsDetail){
         logger.info("开始新增商品详情:{}", JSON.toJSONString(goodsDetail));
         try{
             operateService.addGoodsDetail(goodsDetail);
@@ -40,7 +41,7 @@ public class GoodsOperateController {
     }
 
     @PostMapping("/getMaxDetailCode")
-    public ServerResponse getMaxDetailCode(GoodsDetail goodsDetail){
+    public ServerResponse getMaxDetailCode(@RequestBody GoodsDetail goodsDetail){
         logger.info("开始查询最大商品编码:{}", JSON.toJSONString(goodsDetail));
         ServerResponse result;
         try{
