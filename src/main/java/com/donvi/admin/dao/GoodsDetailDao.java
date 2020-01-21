@@ -1,7 +1,6 @@
 package com.donvi.admin.dao;
 
 import com.donvi.admin.entity.GoodsDetail;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -10,7 +9,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface GoodsDetailDao {
 
-    void addGoodsDetail(@Param("goodsDetail") GoodsDetail goodsDetail);
+    void saveGoodsDetail(GoodsDetail goodsDetail);
 
-    String getMaxDetailCode(@Param("goodsDetail") GoodsDetail goodsDetail);
+    String getMaxDetailCode(GoodsDetail goodsDetail);
 }

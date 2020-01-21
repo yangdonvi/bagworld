@@ -18,9 +18,9 @@ public class GoodsOperateServiceImpl implements GoodsOperateService {
 
     @Override
     @Transactional
-    public void addGoodsDetail(GoodsDetail goodsDetail) throws Exception{
+    public void saveGoodsDetail(GoodsDetail goodsDetail) throws Exception{
         try{
-            goodsDetailDao.addGoodsDetail(goodsDetail);
+            goodsDetailDao.saveGoodsDetail(goodsDetail);
         } catch (Exception e){
             throw e;
         }

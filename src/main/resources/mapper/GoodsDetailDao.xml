@@ -1,9 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.donvi.admin.dao.GoodsDetailDao">
-    <insert id="addGoodsDetail">
-        insert into goods_detail(detail_name_cn, detail_name_eng, detail_code, first_parent_code, second_parent_code, brand_code)
-        values (#{detailNameCn},#{detailNameEng},#{detailCode},#{firstParentCode},#{secondParentCode},#{brandCode})
+    <insert id="saveGoodsDetail">
+        <selectKey keyProperty="count" order="BEFORE" resultType="int">
+            select count(0) from goods_detail where detail_code = #{detailCode}
+        </selectKey>
+        <if test="count == 0">
+            insert into goods_detail(detail_name_cn, detail_name_eng, detail_code, first_parent_code, second_parent_code, brand_code)
+            values (#{detailNameCn},#{detailNameEng},#{detailCode},#{firstParentCode},#{secondParentCode},#{brandCode})
+        </if>
+        <if test="count > 0">
+            update goods_detail
+            <set>
+                detail_name_cn = #{detailNameCn},
+                detail_name_eng = #{detailNameEng}
+            </set>
+            where detail_code = #{detailCode}
+        </if>
     </insert>
 
     <select id="getMaxDetailCode" resultType="java.lang.String">

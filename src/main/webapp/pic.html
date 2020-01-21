@@ -20,7 +20,7 @@
         </div>
         <div class="adminOperateDiv">
             <div style="height: 25px;background-color: #AAC7E9;">
-                <label style="margin-left: 3%;font-size: 20px">新增商品:</label>
+                <label style="margin-left: 3%;font-size: 20px">维护商品:</label>
             </div>
             <div style="height: 20%; margin-left: 3%; margin-top: 3%;">
                 <span class="insertLine">一级类别：</span>
@@ -51,12 +51,18 @@
                 <br>
                 <br>
                 <span class="insertLine">商品编号：</span>
-                <input class="insertLine" id="detailCode" readonly="readonly" value="" style="width: 16%; background-color: lightgray; font-size: 15px;">
+                <input class="insertLine" id="detailCode" value="" style="width: 16%; font-size: 15px;">
                 <span class="insertLine" style="margin-left: 3%;">中文名称：</span>
                 <input class="insertLine" id="detailNameCn" style="width: 15%; font-size: 15px;">
                 <span class="insertLine" style="margin-left: 4%;">英文名称：</span>
                 <input class="insertLine" id="detailNameEng" style="width: 15%; font-size: 15px;">
-                <input class="insertLine" id="submitInsert" type="button" style="margin-left: 4%" value="提交">
+                <input class="insertLine" id="submitSearch" type="button" style="margin-left: 4%" value="查询">
+            </div>
+            <div id="goodDetailbody" class="table-body">
+                <table id="goodDetailTable" cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
@@ -65,51 +71,12 @@
 <script type="text/javascript" src="js/jquery-1.8.3.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
-        $("#firstParentCode").change(function () {
-            getMaxDetailCode();
-        });
-        $("#secondParentCode").change(function () {
-            getMaxDetailCode();
-        });
-        $("#brandCode").change(function () {
-            getMaxDetailCode();
-        });
-        $("#submitInsert").click(function () {
-            saveGoodsDetail();
+        $("#submitSearch").click(function () {
+            searchGoodsDetail();
         })
     })
-    
-    function getMaxDetailCode() {
-        var firstParentCode = $("#firstParentCode").val();
-        var secondParentCode = $("#secondParentCode").val();
-        var brandCode = $("#brandCode").val();
-        var json = {
-            "firstParentCode" : firstParentCode,
-            "secondParentCode" : secondParentCode,
-            "brandCode" : brandCode
-        }
-        $.ajax({
-            url: "/goodsOperate/getMaxDetailCode", //请求地址
-            contentType: "application/json",
-            data: JSON.stringify(json),
-            type: "post", //请求类型
-            dataType: "json", //返回类型
-            async: false, //是否异步，默认为true
-            success: function (response) {
-                if (response.code == 200) {
-                    if (null != response.data && '' != response.data){
-                        $("#detailCode").val(response.data + 1);
-                    }else {
-                        $("#detailCode").val(firstParentCode.concat(secondParentCode).concat(brandCode).concat('001'));
-                    }
-                }else {
-                    alert("服务器异常");
-                }
-            }
-        })
-    }
 
-    function saveGoodsDetail() {
+    function searchGoodsDetail() {
         var firstParentCode = $("#firstParentCode").val();
         var secondParentCode = $("#secondParentCode").val();
         var brandCode = $("#brandCode").val();
@@ -125,7 +92,7 @@
             "detailNameEng" : detailNameEng
         }
         $.ajax({
-            url: "/goodsOperate/saveGoodsDetail", //请求地址
+            url: "/goodsOperate/searchGoodsDetail", //请求地址
             contentType: "application/json",
             data: JSON.stringify(json),
             type: "post", //请求类型

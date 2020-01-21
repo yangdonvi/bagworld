@@ -8,7 +8,7 @@ import com.donvi.utils.ServerResponse;
  */
 public interface GoodsOperateService {
 
-    void addGoodsDetail(GoodsDetail goodsDetail) throws Exception;
+    void saveGoodsDetail(GoodsDetail goodsDetail) throws Exception;
 
     String getMaxDetailCode(GoodsDetail goodsDetail) throws Exception;
 }

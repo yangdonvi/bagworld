@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 /**
  * @Description:
  * @Author: yangdongwei
@@ -27,32 +29,47 @@ public class GoodsOperateController {
     @Autowired
     private GoodsOperateService operateService;
 
-    @PostMapping("/addGoodsDetail")
-    public ServerResponse addGoodsDetail(@RequestBody GoodsDetail goodsDetail){
+    @PostMapping("/saveGoodsDetail")
+    public ServerResponse saveGoodsDetail(@RequestBody GoodsDetail goodsDetail) {
         logger.info("开始新增商品详情:{}", JSON.toJSONString(goodsDetail));
-        try{
-            operateService.addGoodsDetail(goodsDetail);
+        try {
+            operateService.saveGoodsDetail(goodsDetail);
             logger.info("新增成功:{}", JSON.toJSONString(goodsDetail));
-        }catch (Exception e){
-            logger.error("新增商品详情异常",e);
+        } catch (Exception e) {
+            logger.error("新增商品详情异常", e);
             return ServerResponse.createByError();
         }
         return ServerResponse.createBySuccess();
     }
 
     @PostMapping("/getMaxDetailCode")
-    public ServerResponse getMaxDetailCode(@RequestBody GoodsDetail goodsDetail){
+    public ServerResponse getMaxDetailCode(@RequestBody GoodsDetail goodsDetail) {
         logger.info("开始查询最大商品编码:{}", JSON.toJSONString(goodsDetail));
         ServerResponse result;
-        try{
+        try {
             String maxDetailCode = operateService.getMaxDetailCode(goodsDetail);
             logger.info("查询成功，参数:{}, 结果:{}", goodsDetail, maxDetailCode);
             result = ServerResponse.createBySuccess(maxDetailCode);
-        }catch (Exception e){
+        } catch (Exception e) {
             logger.error("查询最大商品编码异常", e);
             result = ServerResponse.createByError();
         }
         return result;
     }
+
+    @PostMapping("/searchGoodsDetail")
+    public ServerResponse searchGoodsDetail(@RequestBody GoodsDetail goodsDetail) {
+        logger.info("开始查询商品:{}", JSON.toJSONString(goodsDetail));
+        ServerResponse result;
+        try {
+            List<GoodsDetail> goodsDetailList = operateService.searchGoodsDetail(goodsDetail);
+            result = ServerResponse.createBySuccess(goodsDetailList);
+        }catch (Exception e){
+            logger.error("查询商品异常", e);
+            result = ServerResponse.createByError();
+        }
+        return result;
+    }
+
 
 }

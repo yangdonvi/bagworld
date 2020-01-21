@@ -19,3 +19,4 @@ body {background-color: darkgray}
 #adminMenu li a {text-decoration:none; color:#666;}
 #adminMenu li a:hover {color:#333;}
 .insertLine {font-size: 20px;}
+.table-body {overflow: auto;overflow-x: hidden;background-color: #FFFFFF;}

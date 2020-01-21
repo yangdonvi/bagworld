@@ -11,6 +11,15 @@ public class GoodsDetail {
     private String secondParentCode;
     private String brandCode;
     private String picName;
+    private Integer count;
+
+    public Integer getCount() {
+        return count;
+    }
+
+    public void setCount(Integer count) {
+        this.count = count;
+    }
 
     public String getDetailCode() {
         return detailCode;
