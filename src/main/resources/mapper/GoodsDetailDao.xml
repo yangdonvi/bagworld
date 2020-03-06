@@ -27,4 +27,36 @@
         and brand_code = #{brandCode}
     </select>
 
+    <select id="searchGoodsDetail" resultType="com.donvi.admin.entity.GoodsDetail">
+        select
+        detail_name_cn          as      detailNameCn,
+        detail_name_eng         as      detailNameEng,
+        detail_code             as      detailCode,
+        first_parent_code       as      firstParentCode,
+        second_parent_code      as      secondParentCode,
+        brand_code              as      brandCode,
+        pic_name                as      picName
+        from goods_detail
+        where
+        1 = 1
+        <if test="detailNameCn != null and detailNameCn != ''">
+            and detail_name_cn like #{detailNameCn}
+        </if>
+        <if test="detailNameEng != null and detailNameEng != ''">
+            and detail_name_eng like #{detailNameEng}
+        </if>
+        <if test="detailCode != null and detailCode != ''">
+            and detail_code like #{detailCode}
+        </if>
+        <if test="firstParentCode != null and firstParentCode != ''">
+            and first_parent_code like #{firstParentCode}
+        </if>
+        <if test="secondParentCode != null and secondParentCode != ''">
+            and second_parent_code like #{secondParentCode}
+        </if>
+        <if test="brandCode != null and brandCode != ''">
+            and brand_code like #{brandCode}
+        </if>
+    </select>
+
 </mapper>

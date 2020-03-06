@@ -18,13 +18,14 @@
                 <li class="adminMenuContent"><a href="pic.html"><span style="font-size: 20px">维护商品</span></a></li>
             </ul>
         </div>
-        <div class="adminOperateDiv">
+        <div class="adminOperateDiv" >
             <div style="height: 25px;background-color: #AAC7E9;">
                 <label style="margin-left: 3%;font-size: 20px">维护商品:</label>
             </div>
             <div style="height: 20%; margin-left: 3%; margin-top: 3%;">
                 <span class="insertLine">一级类别：</span>
                 <select class="insertLine" id="firstParentCode" name="firstParentCode" style="width: 15%">
+                    <option value="">无</option>
                     <option value="101">一级类别1</option>
                     <option value="102">一级类别2</option>
                     <option value="103">一级类别3</option>
@@ -33,7 +34,7 @@
                 </select>
                 <span class="insertLine" style="margin-left: 4%;">二级类别：</span>
                 <select class="insertLine" id="secondParentCode" name="secondParentCode" style="width: 15%">
-                    <option value="0">无</option>
+                    <option value="">无</option>
                     <option value="201">二级类别1</option>
                     <option value="202">二级类别2</option>
                     <option value="203">二级类别3</option>
@@ -42,6 +43,7 @@
                 </select>
                 <span class="insertLine" style="margin-left: 4%;">三级类别：</span>
                 <select class="insertLine" id="brandCode" name="brandCode" id="brandCode" style="width: 15%">
+                    <option value="">无</option>
                     <option value="301">品牌1</option>
                     <option value="302">品牌2</option>
                     <option value="303">品牌3</option>
@@ -58,8 +60,24 @@
                 <input class="insertLine" id="detailNameEng" style="width: 15%; font-size: 15px;">
                 <input class="insertLine" id="submitSearch" type="button" style="margin-left: 4%" value="查询">
             </div>
-            <div id="goodDetailbody" class="table-body">
-                <table id="goodDetailTable" cellspacing="0" cellpadding="0" border="0">
+            <div style="height: 25px;background-color: #AAC7E9;">
+                <label style="margin-left: 3%;font-size: 20px">商品详情:</label>
+            </div>
+            <div id="goodDetailbody">
+                <br>
+                <table style="width: 100%;" border="1" cellspacing="0" cellpadding="0">
+                    <tr style="background-color: #AAC7E9">
+                        <th style="width: 5%">序号</th>
+                        <th style="width: 12%">编号</th>
+                        <th style="width: 15%">名称</th>
+                        <th style="width: 15%">英文名称</th>
+                        <th style="width: 10%">一级类别</th>
+                        <th style="width: 10%">二级类别</th>
+                        <th style="width: 10%">三级类别</th>
+                        <th style="width: 15%">操作</th>
+                    </tr>
+                </table>
+                <table id="detailBody" style="width: 100%;" border="1" cellspacing="0" cellpadding="0">
                     <tbody>
                     </tbody>
                 </table>
@@ -100,7 +118,8 @@
             async: false, //是否异步，默认为true
             success: function (response) {
                 if (response.code == 200) {
-                    alert("新增/修改成功");
+                    // 添加表格内容
+                    addDataToTable(response.data);
                 }else {
                     alert("服务器异常");
                 }
@@ -108,6 +127,25 @@
         })
     }
 
+    function addDataToTable(data){
+        $('#detailBody').find('tbody').empty();
+        if (data.length > 0) {
+            var lastIndex = 0;
+            for (var i in data) {
+                lastIndex = Number($("#detailBody").find('tr').length) + 1;
+                var tr = $('<tr></tr>');
+                tr.append($('<td style="width: 5%">' + Number(Number(lastIndex)) + '</td>'));
+                tr.append($('<td style="width: 12%">' + data[i]["detailCode"] + '</td>'));
+                tr.append($('<td style="width: 15%">' + data[i]["detailNameCn"] + '</td>'));
+                tr.append($('<td style="width: 15%">' + data[i]["detailNameEng"] + '</td>'));
+                tr.append($('<td style="width: 10%">' + data[i]["firstParentCode"] + '</td>'));
+                tr.append($('<td style="width: 10%">' + data[i]["secondParentCode"] + '</td>'));
+                tr.append($('<td style="width: 10%">' + data[i]["brandCode"] + '</td>'));
+                tr.append($('<td style="width: 15%">' + data[i]["vcode"] + '</td>'));
+                $('#detailBody').find('tbody').append(tr);
+            }
+        }
+    }
 </script>
 </body>
 </html>

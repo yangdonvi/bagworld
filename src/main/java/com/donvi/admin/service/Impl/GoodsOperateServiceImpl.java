@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
  * Created by Donvi Yang on 2020/1/4.
  */
@@ -30,6 +32,15 @@ public class GoodsOperateServiceImpl implements GoodsOperateService {
     public String getMaxDetailCode(GoodsDetail goodsDetail) throws Exception{
         try{
             return goodsDetailDao.getMaxDetailCode(goodsDetail);
+        }catch (Exception e){
+            throw e;
+        }
+    }
+
+    @Override
+    public List<GoodsDetail> searchGoodsDetail(GoodsDetail goodsDetail) throws Exception {
+        try{
+            return goodsDetailDao.searchGoodsDetail(goodsDetail);
         }catch (Exception e){
             throw e;
         }
