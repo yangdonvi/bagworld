@@ -77,7 +77,8 @@
                         <th style="width: 15%">操作</th>
                     </tr>
                 </table>
-                <table id="detailBody" style="width: 100%;" border="1" cellspacing="0" cellpadding="0">
+                <table id="detailBody" style="width: 100%;word-wrap:break-word;
+                    word-break:break-all;overflow: hidden;text-align: center" border="1" cellspacing="0" cellpadding="0">
                     <tbody>
                     </tbody>
                 </table>
@@ -87,6 +88,7 @@
 </div>
 
 <script type="text/javascript" src="js/jquery-1.8.3.js"></script>
+<script type="text/javascript" src="js/jquery.easyui.min-new.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
         $("#submitSearch").click(function () {
@@ -141,11 +143,31 @@
                 tr.append($('<td style="width: 10%">' + data[i]["firstParentCode"] + '</td>'));
                 tr.append($('<td style="width: 10%">' + data[i]["secondParentCode"] + '</td>'));
                 tr.append($('<td style="width: 10%">' + data[i]["brandCode"] + '</td>'));
-                tr.append($('<td style="width: 15%">' + data[i]["vcode"] + '</td>'));
+                tr.append($('<td style="width: 15%">' + '<a onclick="edit();" >编辑</a>&nbsp;&nbsp;&nbsp;&nbsp;'
+                    + '<a onclick="del();" >删除</a>' + '</td>'));
                 $('#detailBody').find('tbody').append(tr);
             }
         }
     }
+
+    function edit(){
+        var url = "/goodsOperate/testFrame.do";
+        return $('body').window({
+            id: 'window_chooseMeasdoc',
+            title: '选择计量单位',
+            content: '<iframe id="listMeasdocFrame" frameborder="0" src='+url+'></iframe>',
+            width: 500,
+            height: 450,
+            confirmClose: false,
+            draggable: true,
+            isModal: true
+        });
+    }
+
+    function del(){
+        alert(2);
+    }
+
 </script>
 </body>
 </html>
