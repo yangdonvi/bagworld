@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>admin</title>
     <link type="text/css" rel="stylesheet" href="css/common.css">
+    <link type="text/css" rel="stylesheet" href="css/lib.ui.window.css">
 </head>
 <body>
 <div class="midBody">
@@ -12,10 +13,11 @@
 
     </div>
     <div class="adminMainDiv">
+        <input id="curGoodsDetailCode" type="hidden">
         <div class="adminMenuDiv">
             <ul id="adminMenu" style="margin: 0px; padding: 0px;">
                 <li class="adminMenuContent"><a href="admin.html"><span style="font-size: 20px">新增商品</span></a></li>
-                <li class="adminMenuContent"><a href="pic.html"><span style="font-size: 20px">维护商品</span></a></li>
+                <li class="adminMenuContent"><a href="listGoods.html"><span style="font-size: 20px">维护商品</span></a></li>
             </ul>
         </div>
         <div class="adminOperateDiv" >
@@ -89,6 +91,7 @@
 
 <script type="text/javascript" src="js/jquery-1.8.3.js"></script>
 <script type="text/javascript" src="js/jquery.easyui.min-new.js"></script>
+<script type="text/javascript" src="js/lib.ui.window.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
         $("#submitSearch").click(function () {
@@ -143,18 +146,20 @@
                 tr.append($('<td style="width: 10%">' + data[i]["firstParentCode"] + '</td>'));
                 tr.append($('<td style="width: 10%">' + data[i]["secondParentCode"] + '</td>'));
                 tr.append($('<td style="width: 10%">' + data[i]["brandCode"] + '</td>'));
-                tr.append($('<td style="width: 15%">' + '<a onclick="edit();" >编辑</a>&nbsp;&nbsp;&nbsp;&nbsp;'
+                tr.append($('<td style="width: 15%">' + '<a onclick="edit($(this));" >编辑</a>&nbsp;&nbsp;&nbsp;&nbsp;'
                     + '<a onclick="del();" >删除</a>' + '</td>'));
                 $('#detailBody').find('tbody').append(tr);
             }
         }
     }
 
-    function edit(){
-        var url = "/goodsOperate/testFrame.do";
+    function edit(currentRow){
+        var detailCode = currentRow.closest("tr").find("td:eq(1)").text();
+        $("#curGoodsDetailCode").val(detailCode);
+        var url = "/testFrame";
         return $('body').window({
             id: 'window_chooseMeasdoc',
-            title: '选择计量单位',
+            title: '编辑商品',
             content: '<iframe id="listMeasdocFrame" frameborder="0" src='+url+'></iframe>',
             width: 500,
             height: 450,
@@ -162,6 +167,7 @@
             draggable: true,
             isModal: true
         });
+
     }
 
     function del(){

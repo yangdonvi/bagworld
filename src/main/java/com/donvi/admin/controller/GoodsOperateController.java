@@ -72,10 +72,7 @@ public class GoodsOperateController {
         return result;
     }
 
-    @PostMapping("/testFrame")
-    public ModelAndView testFrame(){
-        return new ModelAndView("/index");
-    }
+
 
 
 }
